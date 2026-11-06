@@ -14,4 +14,14 @@ public class Solicitud {
     public LocalDate venc;
     public Responsable resp;
     public String obs;
+
+    // La solicitud está cerrada si ya fue resuelta o rechazada.
+    public boolean estaCerrada() {
+        return estado.equals("RESUELTA") || estado.equals("RECHAZADA");
+    }
+
+    // Está vencida si sigue abierta y la fecha de referencia es posterior al vencimiento.
+    public boolean estaVencidaAl(LocalDate fecha) {
+        return !estaCerrada() && fecha.isAfter(venc);
+    }
 }

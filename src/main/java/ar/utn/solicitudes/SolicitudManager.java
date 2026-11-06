@@ -110,7 +110,7 @@ public class SolicitudManager {
             System.out.println("Error: solicitud no encontrada");
             return false;
         }
-        if (sol.estado.equals("RESUELTA") || sol.estado.equals("RECHAZADA")) {
+        if (sol.estaCerrada()) {
             System.out.println("Error: la solicitud esta cerrada");
             return false;
         }
@@ -251,7 +251,7 @@ public class SolicitudManager {
             else if (s.tipo.equals("CAMBIO_COMISION")) com++;
             else if (s.tipo.equals("RECLAMO_NOTA")) recl++;
 
-            if ((s.estado.equals("PENDIENTE") || s.estado.equals("EN_PROCESO")) && ref.isAfter(s.venc)) {
+            if (s.estaVencidaAl(ref)) {
                 vencidas.add(s);
             }
         }
