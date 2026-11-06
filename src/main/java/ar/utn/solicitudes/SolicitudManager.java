@@ -104,13 +104,8 @@ public class SolicitudManager {
     }
 
     public boolean asignarResponsable(int id, String nombreResp, String area) {
-        Solicitud sol = null;
-        for (Solicitud s : lista) {
-            if (s.id == id) {
-                sol = s;
-                break;
-            }
-        }
+                Solicitud sol = buscarPorId(id);
+    
         if (sol == null) {
             System.out.println("Error: solicitud no encontrada");
             return false;
@@ -129,13 +124,8 @@ public class SolicitudManager {
 
     // cambia el estado de la solicitud validando las transiciones
     public boolean cambiarEstado(int id, String nuevo, String obs) {
-        Solicitud sol = null;
-        for (Solicitud s : lista) {
-            if (s.id == id) {
-                sol = s;
-                break;
-            }
-        }
+                Solicitud sol = buscarPorId(id);
+                
         if (sol == null) {
             System.out.println("Error: solicitud no encontrada");
             return false;
@@ -190,6 +180,15 @@ public class SolicitudManager {
         return res;
     }
 
+    private Solicitud buscarPorId(int id) {
+        for (Solicitud s : lista) {
+            if (s.id == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
     public ArrayList<Solicitud> buscarPorTipo(String tipo) {
         ArrayList<Solicitud> res = new ArrayList<>();
         for (Solicitud s : lista) {
