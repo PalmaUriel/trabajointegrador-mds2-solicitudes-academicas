@@ -21,7 +21,7 @@ public class SolicitudManager {
         String descripcion = datos.descripcion();
         boolean urgente = datos.urgente();
         String fecha = datos.fecha();
-        
+
         // validaciones
         if (legajo == null || legajo.trim().equals("")) {
             System.out.println("Error: el legajo es obligatorio");
@@ -39,7 +39,7 @@ public class SolicitudManager {
             System.out.println("Error: email invalido");
             return -1;
         }
-                if (!TipoSolicitud.existe(tipo)) {
+        if (!TipoSolicitud.existe(tipo)) {
             System.out.println("Error: tipo de solicitud invalido");
             return -1;
         }
@@ -59,7 +59,6 @@ public class SolicitudManager {
         TipoSolicitud tipoSolicitud = TipoSolicitud.valueOf(tipo);
         int dias = tipoSolicitud.getDiasPlazo();
         String p = tipoSolicitud.prioridadPara(urgente);
-        
 
         // buscar si el estudiante ya existe para reutilizarlo
         Estudiante e = null;
@@ -88,8 +87,8 @@ public class SolicitudManager {
     }
 
     public boolean asignarResponsable(int id, String nombreResp, String area) {
-                Solicitud sol = buscarPorId(id);
-    
+        Solicitud sol = buscarPorId(id);
+
         if (sol == null) {
             System.out.println("Error: solicitud no encontrada");
             return false;
@@ -108,8 +107,8 @@ public class SolicitudManager {
 
     // cambia el estado de la solicitud validando las transiciones
     public boolean cambiarEstado(int id, String nuevo, String obs) {
-                Solicitud sol = buscarPorId(id);
-                
+        Solicitud sol = buscarPorId(id);
+
         if (sol == null) {
             System.out.println("Error: solicitud no encontrada");
             return false;
@@ -172,7 +171,7 @@ public class SolicitudManager {
         }
         return null;
     }
-    
+
     public ArrayList<Solicitud> buscarPorTipo(String tipo) {
         ArrayList<Solicitud> res = new ArrayList<>();
         for (Solicitud s : lista) {
@@ -200,8 +199,10 @@ public class SolicitudManager {
         }
         for (Solicitud s : l) {
             String r;
-            if (s.resp == null) r = "(sin asignar)";
-            else r = s.resp.getNombre() + " (" + s.resp.getArea() + ")";
+            if (s.resp == null)
+                r = "(sin asignar)";
+            else
+                r = s.resp.getNombre() + " (" + s.resp.getArea() + ")";
             System.out.println("#" + s.id + " [" + s.estado + "] " + s.tipo + " - " + s.prioridad + " - "
                     + s.est.getLegajo() + " " + s.est.getNombre() + " - vence " + s.venc.format(f)
                     + " - resp: " + r);
@@ -225,15 +226,23 @@ public class SolicitudManager {
         int cert = 0, equiv = 0, com = 0, recl = 0;
         ArrayList<Solicitud> vencidas = new ArrayList<>();
         for (Solicitud s : lista) {
-            if (s.estado.equals("PENDIENTE")) pend++;
-            else if (s.estado.equals("EN_PROCESO")) proc++;
-            else if (s.estado.equals("RESUELTA")) res++;
-            else if (s.estado.equals("RECHAZADA")) rech++;
+            if (s.estado.equals("PENDIENTE"))
+                pend++;
+            else if (s.estado.equals("EN_PROCESO"))
+                proc++;
+            else if (s.estado.equals("RESUELTA"))
+                res++;
+            else if (s.estado.equals("RECHAZADA"))
+                rech++;
 
-            if (s.tipo.equals("CERTIFICADO")) cert++;
-            else if (s.tipo.equals("EQUIVALENCIA")) equiv++;
-            else if (s.tipo.equals("CAMBIO_COMISION")) com++;
-            else if (s.tipo.equals("RECLAMO_NOTA")) recl++;
+            if (s.tipo.equals("CERTIFICADO"))
+                cert++;
+            else if (s.tipo.equals("EQUIVALENCIA"))
+                equiv++;
+            else if (s.tipo.equals("CAMBIO_COMISION"))
+                com++;
+            else if (s.tipo.equals("RECLAMO_NOTA"))
+                recl++;
 
             if (s.estaVencidaAl(ref)) {
                 vencidas.add(s);
