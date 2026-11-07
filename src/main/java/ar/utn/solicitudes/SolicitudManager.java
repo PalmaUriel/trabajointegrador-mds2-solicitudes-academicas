@@ -39,8 +39,7 @@ public class SolicitudManager {
             System.out.println("Error: email invalido");
             return -1;
         }
-        if (!tipo.equals("CERTIFICADO") && !tipo.equals("EQUIVALENCIA") && !tipo.equals("CAMBIO_COMISION")
-                && !tipo.equals("RECLAMO_NOTA")) {
+                if (!TipoSolicitud.existe(tipo)) {
             System.out.println("Error: tipo de solicitud invalido");
             return -1;
         }
@@ -56,33 +55,11 @@ public class SolicitudManager {
             return -1;
         }
 
-        // calcular prioridad y vencimiento segun el tipo
-        String p;
-        int dias;
-        switch (tipo) {
-            case "CERTIFICADO":
-                dias = 3;
-                if (urgente) p = "ALTA";
-                else p = "MEDIA";
-                break;
-            case "EQUIVALENCIA":
-                dias = 15;
-                if (urgente) p = "MEDIA";
-                else p = "BAJA";
-                break;
-            case "CAMBIO_COMISION":
-                dias = 5;
-                if (urgente) p = "ALTA";
-                else p = "MEDIA";
-                break;
-            case "RECLAMO_NOTA":
-                dias = 7;
-                p = "ALTA";
-                break;
-            default:
-                dias = 10;
-                p = "BAJA";
-        }
+        // prioridad y vencimiento segun las reglas del tipo
+        TipoSolicitud tipoSolicitud = TipoSolicitud.valueOf(tipo);
+        int dias = tipoSolicitud.getDiasPlazo();
+        String p = tipoSolicitud.prioridadPara(urgente);
+        
 
         // buscar si el estudiante ya existe para reutilizarlo
         Estudiante e = null;
