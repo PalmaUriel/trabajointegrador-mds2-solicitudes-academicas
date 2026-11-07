@@ -13,8 +13,15 @@ public class SolicitudManager {
     private DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     // registra una solicitud nueva, devuelve el id o -1 si hubo error
-    public int registrar(String legajo, String nombre, String email, String tipo, String descripcion,
-                         boolean urgente, String fecha) {
+    public int registrar(DatosRegistroSolicitud datos) {
+        String legajo = datos.legajo();
+        String nombre = datos.nombre();
+        String email = datos.email();
+        String tipo = datos.tipo();
+        String descripcion = datos.descripcion();
+        boolean urgente = datos.urgente();
+        String fecha = datos.fecha();
+        
         // validaciones
         if (legajo == null || legajo.trim().equals("")) {
             System.out.println("Error: el legajo es obligatorio");
