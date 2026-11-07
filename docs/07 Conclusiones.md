@@ -41,7 +41,7 @@ Mi aporte se centró en el sistema base, la gestión del repositorio y los refac
 ### Lorenzo Pattini
 Me encargué de la descripción inicial del sistema, del refactoring R2 (Move Method) y de las evidencias de funcionamiento. El mayor desafío fue entender el concepto de "Feature Envy" y darme cuenta de que la lógica de "qué es una solicitud cerrada" estaba en el manager en lugar de estar dentro de la propia clase `Solicitud`. Mover esos métodos fue un cambio pequeño pero que dejó el código mucho más limpio. También aprendí que documentar el sistema base no es solo listar funciones, sino descubrir las reglas de negocio que están escondidas en los `switch` y los `if/else`.
 
-### Federico *(completar apellido)*
+### Federico Quinteros
 Mi trabajo se enfocó en el análisis de calidad, la identificación de code smells y el refactoring R3 (Introduce Parameter Object). El diagnóstico me permitió ver que los problemas no estaban en que el sistema fallara, sino en cómo estaba estructurado. El refactoring R3 fue especialmente útil para entender que agrupar parámetros en un objeto (`DatosRegistroSolicitud`) no solo mejora la legibilidad, sino que también prepara el código para futuras extensiones sin modificar la firma del método. Aprendí que el Code Review es una herramienta de aprendizaje mutuo y no una auditoría.
 
 ---
