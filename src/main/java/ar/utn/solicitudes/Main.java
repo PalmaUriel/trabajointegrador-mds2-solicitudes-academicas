@@ -42,7 +42,7 @@ public class Main {
                     boolean urg = sc.nextLine().equalsIgnoreCase("s");
                     System.out.print("Fecha (dd/mm/aaaa): ");
                     String fe = sc.nextLine();
-                    int id = m.registrar(leg, nom, mail, tipo, d, urg, fe);
+                    int id = m.registrar(new DatosRegistroSolicitud(leg, nom, mail, tipo, d, urg, fe));
                     if (id != -1) {
                         System.out.println("Solicitud registrada con id " + id);
                     }
